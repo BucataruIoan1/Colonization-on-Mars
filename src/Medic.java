@@ -4,9 +4,10 @@ public class Medic extends Human{
 
     }
 
-    public Medic(byte x, byte y) {
+    public Medic(byte x, byte y, String name) {
         this.x = x;
         this.y = y;
+        this.name = name;
     }
 
 //    @Override

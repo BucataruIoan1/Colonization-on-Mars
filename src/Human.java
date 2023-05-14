@@ -1,6 +1,8 @@
-public abstract class Human implements Movement{
+import java.util.Random;
 
-    private String name;
+public abstract class Human implements Movement {
+
+    String name;
     private int age;
     boolean gender;
     private String status;
@@ -34,5 +36,15 @@ public abstract class Human implements Movement{
         if(h1.y != 9) {
             h1.y++;
         } else throw new IllegalArgumentException("Movement cannot be posible");
+    }
+
+    static final String[] names = {"John", "Michael", "Bill", "Liam", "Emma", "Noah", "Oliver", "Peter", "Chris",
+            "Charlotte", "Ethan", "Elizabeth", "Sofia", "Lucas", "James", "Grace", "Alexander", "Chloe", "Daniel",
+            "Roxane", "Robert", "David", "Samuel", "Lilly", "Joseph", "Henry", "Ella", "Penelope", "Amelia", "Evelyn"};
+
+    public static String generateName() {
+        Random random = new Random();
+        String randomName = names[random.nextInt(names.length)];
+        return randomName;
     }
 }

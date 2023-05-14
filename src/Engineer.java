@@ -8,9 +8,10 @@ public class Engineer extends Human{
 
     }
 
-    public Engineer(byte x, byte y) {
+    public Engineer(byte x, byte y, String name) {
         this.x = x;
         this.y = y;
+        this.name = name;
     }
 
 //    @Override

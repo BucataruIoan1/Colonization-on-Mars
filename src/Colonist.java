@@ -4,9 +4,10 @@ public class Colonist extends Human{
 
     }
 
-    public Colonist(byte x, byte y) {
+    public Colonist(byte x, byte y, String name) {
         this.x = x;
         this.y = y;
+        this.name = name;
     }
 
 //    @Override
