@@ -1,25 +1,25 @@
 import java.util.Random;
-
-public abstract class Human implements Movement {
-
+public  abstract class Human  implements Movement{
     String name;
-    private int age;
-    boolean gender;
-    private String status;
-    byte HP;
+    int age;
+    boolean  gender;
+    //  private  String status;
+    byte HP=100;
+
     byte x;
     byte y;
+    int Oxygen=100;
 
-    @Override
-    public void moveUp(Human h1) {
-        if(h1.x != 0) {
-            h1.x--;
+
+    public void moveUp() {
+        if(x != 0) {
+            x--;
         } else throw new IllegalArgumentException("Movement cannot be posible");
     }
 
     @Override
     public void moveDown(Human h1) {
-        if(h1.x != 9) {
+        if(h1.x != 9 ) {
             h1.x++;
         } else throw new IllegalArgumentException("Movement cannot be posible");
     }
@@ -41,10 +41,20 @@ public abstract class Human implements Movement {
     static final String[] names = {"John", "Michael", "Bill", "Liam", "Emma", "Noah", "Oliver", "Peter", "Chris",
             "Charlotte", "Ethan", "Elizabeth", "Sofia", "Lucas", "James", "Grace", "Alexander", "Chloe", "Daniel",
             "Roxane", "Robert", "David", "Samuel", "Lilly", "Joseph", "Henry", "Ella", "Penelope", "Amelia", "Evelyn"};
+    ;
 
+    static final int[] ages={24,30,18,19,21,32,25,20,22,23};
+    public static int generateAge()
+    {
+        Random random=new Random();
+        int randomAge=ages[random.nextInt(ages.length)];
+        return randomAge;
+    }
     public static String generateName() {
         Random random = new Random();
         String randomName = names[random.nextInt(names.length)];
         return randomName;
     }
+
+
 }
