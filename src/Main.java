@@ -1,3 +1,5 @@
+import com.sun.source.tree.TypeCastTree;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -84,7 +86,8 @@ public class Main {
                 Mars[i][j] = new Tile(i, j);
             }
         }
-
+        int numberOfAstronauts = numberOfColonists + numberOfMedics + numberOfEngineers;
+        ArrayList<Human> Astronauts = new ArrayList<>(numberOfAstronauts);
         ArrayList<Engineer> engineers = new ArrayList<>(numberOfEngineers);
         ArrayList<Medic> medics = new ArrayList<>(numberOfMedics);
         ArrayList<Colonist> colonists = new ArrayList<>(numberOfColonists);
@@ -93,6 +96,7 @@ public class Main {
             Engineer e1 = new Engineer((byte) 1, (byte) 2, Engineer.generateName(), Engineer.generateAge());
             System.out.println(e1.name + ", " + e1.age);
             engineers.add(e1);
+            Astronauts.add(e1);
             Mars[4][4].presents.add(e1);
         }
 
@@ -101,6 +105,7 @@ public class Main {
             Medic m1 = new Medic((byte) 4, (byte) 4, Medic.generateName(), Medic.generateAge());
             System.out.println(m1.name + ", " + m1.age);
             medics.add(m1);
+            Astronauts.add(m1);
             Mars[4][4].presents.add(m1);
         }
 
@@ -108,6 +113,7 @@ public class Main {
             Colonist c1 = new Colonist((byte) 4, (byte) 4, Colonist.generateName(), Colonist.generateAge());
             System.out.println(c1.name + ", " + c1.age);
             colonists.add(c1);
+            Astronauts.add(c1);
             Mars[4][4].presents.add(c1);
         }
 
@@ -133,7 +139,9 @@ public class Main {
         while (true) {
             boolean gameover = false;
             while (true) {
-                Human SelectedMember;
+                Scanner command = new Scanner(System.in);
+                String commandText = scan.next();
+                Human SelectedMember=null;
                 boolean oktocontinue = false;
                 System.out.println("-------------------------------------------");
                 System.out.println("TURN " + turnnumber);
@@ -145,7 +153,26 @@ public class Main {
                 System.out.println("Colonists:");
                 printteam(colonists);
                 printTable();
-                String commandText = scan.next();
+
+
+                if (commandText.equalsIgnoreCase("Select")) {
+                    String argument = command.next();
+                    if (!argument.isEmpty()) {
+                        for (Human astro : Astronauts) {
+                            if (astro.name.equals(argument)) {
+                                SelectedMember = astro;
+                                System.out.println("Selected " + SelectedMember.name);
+                                break;
+                            }
+                        }
+                    } else {
+                        System.out.println("Invalid command. Please provide a name after 'select'.");
+                    }
+                    if(SelectedMember!=null){
+                        oktocontinue=true;
+                        System.out.println("Selected "+ SelectedMember.name);
+                    }
+                }
                 switch (commandText.toLowerCase()) {
                     case "select":
                         break;
@@ -172,7 +199,7 @@ public class Main {
                         break;
                     case "exit":
                         oktocontinue = true;
-                        gameover=true;
+                        gameover = true;
                         break;
                     default:
                         System.out.println("Invalid command. Please try again.");
@@ -193,3 +220,4 @@ public class Main {
 
 
 }
+
