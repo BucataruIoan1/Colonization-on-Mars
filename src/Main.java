@@ -8,12 +8,14 @@ public class Main {
         for (byte i = 0; i < 10; i++) {
             for (byte j = 0; j < 10; j++) {
                 if (Mars[i][j].presents.size() == 0) {
-                    System.out.print("[    ]" + " ");
+                    System.out.print("[  ?  ]" + " ");
+                } else {
+                    System.out.print("[ ");
+                    for (Human object : Mars[i][j].presents) {
+                        System.out.print(object.name + " ");
+                    }
+                    System.out.print("]");
                 }
-                for (Human object : Mars[i][j].presents) {
-                    System.out.print("[ " + object.name + " ]" + " ");
-                }
-
             }
             System.out.println();
         }
@@ -35,7 +37,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         String variabileStart = scan.next();
         variabileStart = variabileStart.toUpperCase();
-        if(variabileStart.equals("HELP")){
+        if (variabileStart.equals("HELP")) {
             System.out.println("Your objective is to explore Mars.");
             System.out.println("Every turn, you can see your team and their status at the top.");
             System.out.println("You win if you explore the whole of Mars. You lose if your whole team dies.");
@@ -44,6 +46,8 @@ public class Main {
             System.out.println("Unexplored tiles are marked with ?, explore them by moving an Astronaut over them. Colonists are the best for exploring, as other roles have higher chances of being injured");
             System.out.println("Medics may heal other Astornauts using the \"heal\" command, Engineers may repair other Astronauts' equipment using the \"repair\" command");
             System.out.println("Once you are ready to proceed, use the \"NextTurn\" command to move on to the next turn");
+            System.out.println("You can end the game at any time using the \"exit\" command");
+
         }
         while (!variabileStart.equals("START")) {
             System.out.println("Please type START to start the game");
@@ -127,7 +131,11 @@ public class Main {
         //System.out.println(engineers.get(0).name);
         System.out.println("It's time to explore!");
         while (true) {
+            boolean gameover = false;
             while (true) {
+                Human SelectedMember;
+                boolean oktocontinue = false;
+                System.out.println("-------------------------------------------");
                 System.out.println("TURN " + turnnumber);
                 System.out.println("Your team:");
                 System.out.println("Medics:");
@@ -136,29 +144,50 @@ public class Main {
                 printteam(engineers);
                 System.out.println("Colonists:");
                 printteam(colonists);
+                printTable();
                 String commandText = scan.next();
                 switch (commandText.toLowerCase()) {
+                    case "select":
+                        break;
                     case "nextturn":
+                        oktocontinue = true;
                         break;
                     case "moveup":
+                        oktocontinue = true;
                         break;
                     case "movedown":
+                        oktocontinue = true;
                         break;
                     case "moveleft":
+                        oktocontinue = true;
                         break;
                     case "moveright":
+                        oktocontinue = true;
                         break;
                     case "heal":
+                        oktocontinue = true;
                         break;
                     case "repair":
+                        oktocontinue = true;
+                        break;
+                    case "exit":
+                        oktocontinue = true;
+                        gameover=true;
                         break;
                     default:
                         System.out.println("Invalid command. Please try again.");
                         break;
-                }
-                turnnumber++;
-            }
 
+                }
+                if (oktocontinue) {
+                    turnnumber++;
+                    break;
+                }
+            }
+            if (gameover) {
+                System.out.println("Exiting game...");
+                break;
+            }
         }
     }
 
