@@ -7,24 +7,24 @@ public class Main {
     static Tile[][] Mars = new Tile[10][10];
 
     public static void printTable() {
-        for(int i=0;i<10;i++){
-            for (int j=0;j<10;j++){
-                Mars[i][j].explored=false;
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                Mars[i][j].explored = false;
             }
         }
 
-        Mars[4][4].explored=true;
+        Mars[4][4].explored = true;
         for (byte i = 0; i < 10; i++) {
             for (byte j = 0; j < 10; j++) {
                 if (Mars[i][j].presents.size() == 0 && !Mars[i][j].explored) {
                     System.out.print("[  ?  ]" + " ");
-                } else if(Mars[i][j].presents.size()!=0){
+                } else if (Mars[i][j].presents.size() != 0) {
                     System.out.print("[ ");
                     for (Human object : Mars[i][j].presents) {
                         System.out.print(object.name + " ");
                     }
                     System.out.print("]");
-                }else if(Mars[i][j].presents.size()==0 && Mars[i][j].explored){
+                } else if (Mars[i][j].presents.size() == 0 && Mars[i][j].explored) {
                     System.out.print("[     ]" + " ");
                 }
             }
@@ -35,7 +35,7 @@ public class Main {
     public static void printteam(ArrayList<? extends Human> inarr) {
         for (Human colonist : inarr) {
             if (colonist.HP > 0) {
-                System.out.println(colonist.name + ", " + colonist.age + " y/o " + colonist.HP + "/100 HP"+" "+colonist.Oxygen+"/100 O2");
+                System.out.println(colonist.name + ", " + colonist.age + " y/o " + colonist.HP + "/100 HP" + " " + colonist.Oxygen + "/100 O2");
             } else {
                 System.out.println(colonist.name + " DEAD");
             }
@@ -135,7 +135,7 @@ public class Main {
         System.out.println("It's time to explore!");
         Human SelectedMember = null;
 
-        boolean firstprint=true;
+        boolean firstprint = true;
         while (true) {
             boolean gameover = false;
             while (true) {
@@ -144,7 +144,7 @@ public class Main {
                 boolean oktocontinue = false;
                 System.out.println("-------------------------------------------");
                 System.out.println("TURN " + turnnumber);
-                if(firstprint) {
+                if (firstprint) {
                     System.out.println("Your team:");
                     System.out.println("Medics:");
                     printteam(medics);
@@ -153,9 +153,9 @@ public class Main {
                     System.out.println("Colonists:");
                     printteam(colonists);
                 }
-                if(firstprint) {
+                if (firstprint) {
                     printTable();
-                    firstprint=false;
+                    firstprint = false;
                 }
 
 
@@ -175,11 +175,11 @@ public class Main {
                             } else {
                                 System.out.println("Invalid command. Please provide a name after 'select'.");
                             }
-                            if (SelectedMember != null && SelectedMember.HP>0) {
+                            if (SelectedMember != null && SelectedMember.HP > 0) {
 
                                 System.out.println("Selected " + SelectedMember.name);
-                            }else{
-                                System.out.println("Can't find "+ argument);
+                            } else {
+                                System.out.println("Can't find " + argument);
                             }
                         }
                     }
@@ -189,7 +189,7 @@ public class Main {
                             Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
                             SelectedMember.moveUp();
                             Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
-                            Mars[SelectedMember.x][SelectedMember.y].explored=true;
+                            Mars[SelectedMember.x][SelectedMember.y].explored = true;
                             System.out.println("Your team:");
                             System.out.println("Medics:");
                             printteam(medics);
@@ -208,7 +208,7 @@ public class Main {
                             Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
                             SelectedMember.moveDown();
                             Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
-                            Mars[SelectedMember.x][SelectedMember.y].explored=true;
+                            Mars[SelectedMember.x][SelectedMember.y].explored = true;
 
                             System.out.println("Your team:");
                             System.out.println("Medics:");
@@ -228,7 +228,7 @@ public class Main {
                             Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
                             SelectedMember.moveLeft();
                             Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
-                            Mars[SelectedMember.x][SelectedMember.y].explored=true;
+                            Mars[SelectedMember.x][SelectedMember.y].explored = true;
 
                             System.out.println("Your team:");
                             System.out.println("Medics:");
@@ -248,7 +248,7 @@ public class Main {
                             Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
                             SelectedMember.moveRight();
                             Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
-                            Mars[SelectedMember.x][SelectedMember.y].explored=true;
+                            Mars[SelectedMember.x][SelectedMember.y].explored = true;
 
                             System.out.println("Your team:");
                             System.out.println("Medics:");
