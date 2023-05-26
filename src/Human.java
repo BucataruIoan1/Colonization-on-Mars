@@ -4,7 +4,7 @@ public  abstract class Human  implements Movement{
     int age;
     boolean  gender;
     //  private  String status;
-    byte HP=100;
+    int HP=100;
 
     byte x;
     byte y;
