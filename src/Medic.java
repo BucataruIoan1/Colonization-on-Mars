@@ -25,41 +25,5 @@ public class Medic extends Human implements Movement{
         }
 
     }
-    @Override
-    public void moveUpPlayer() {
-        if(x!=7)
-        {
-            this.x= (byte) (this.x-2);
-        }else throw new IllegalArgumentException("Movement cannot be posible");
 
-    }
-
-    @Override
-    public void moveDownPlayer() {
-        if(x != 9) {
-            this.x= (byte) (this.x+1);
-        } else throw new IllegalArgumentException("Movement cannot be posible");
-
-    }
-
-    @Override
-    public void moveRightPlayer() {
-        if(x!=4 &&HP>=50)
-        {
-            HP= (byte) (HP+20);
-            this.x= (byte) (this.x+2);
-
-        }else throw new IllegalArgumentException("Movement cannot be posible");
-
-    }
-
-    @Override
-    public void moveLeftPlayer() {
-        if(y!=4&&Oxygen>40)
-        {
-            this.Oxygen=this.Oxygen+30;
-            this.y= (byte) (this.y-1);
-
-        }else throw new IllegalArgumentException("Movement cannot be posible");
-    }
 }

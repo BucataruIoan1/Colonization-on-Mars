@@ -26,9 +26,9 @@ public class Main {
     public static void printteam(ArrayList<? extends Human> inarr) {
         for (Human colonist : inarr) {
             if (colonist.HP != 0) {
-                System.out.println(colonist.name + ", " + colonist.age + " y/o " + colonist.HP + "/100 HP");
+                System.out.println(colonist.name + ", " + colonist.age + " y/o " + colonist.HP + "/100 HP"+" "+colonist.Oxygen+"/100 O2");
             } else {
-                System.out.println(colonist.name + "DEAD");
+                System.out.println(colonist.name + " DEAD");
             }
         }
     }
@@ -93,7 +93,7 @@ public class Main {
         ArrayList<Colonist> colonists = new ArrayList<>(numberOfColonists);
 
         for (int i = 0; i < numberOfEngineers; i++) {
-            Engineer e1 = new Engineer((byte) 1, (byte) 2, Engineer.generateName(), Engineer.generateAge());
+            Engineer e1 = new Engineer((byte) 4, (byte) 4, Engineer.generateName(), Engineer.generateAge());
             System.out.println(e1.name + ", " + e1.age);
             engineers.add(e1);
             Astronauts.add(e1);
@@ -117,94 +117,144 @@ public class Main {
             Mars[4][4].presents.add(c1);
         }
 
-        //engineers.get(1).moveUp(engineers.get(1));
-        //engineers.get(1).moveUpPlayer();
-        // System.out.println(engineers.get(1).x);
-        //System.out.println(engineers.get(1).y);
-
-        /// colonists.get(1).moveUpPlayer();
-
         printTable();
         Medic m1 = new Medic((byte) 2, (byte) 2, Medic.generateName(), Medic.generateAge());
         Colonist c1 = new Colonist((byte) 2, (byte) 3, Colonist.generateName(), Colonist.generateAge());
         Engineer e1 = new Engineer((byte) 1, (byte) 3, Engineer.generateName(), Engineer.generateAge());
-        //c1.moveUpPlayer();
-        //m1.moveLeftPlayer();;
-        // c1.moveUp();
-        //Damage d1=new Damage();
-        //d1.moveUp();
 
-        //System.out.println(engineers.get(0).name);
+
         System.out.println("It's time to explore!");
+        Human SelectedMember = null;
+
+        boolean firstprint=true;
         while (true) {
             boolean gameover = false;
             while (true) {
                 Scanner command = new Scanner(System.in);
                 String commandText = scan.next();
-                Human SelectedMember=null;
                 boolean oktocontinue = false;
                 System.out.println("-------------------------------------------");
                 System.out.println("TURN " + turnnumber);
-                System.out.println("Your team:");
-                System.out.println("Medics:");
-                printteam(medics);
-                System.out.println("Engineers:");
-                printteam(engineers);
-                System.out.println("Colonists:");
-                printteam(colonists);
-                printTable();
+                if(firstprint) {
+                    System.out.println("Your team:");
+                    System.out.println("Medics:");
+                    printteam(medics);
+                    System.out.println("Engineers:");
+                    printteam(engineers);
+                    System.out.println("Colonists:");
+                    printteam(colonists);
+                }
+                if(firstprint) {
+                    printTable();
+                    firstprint=false;
+                }
 
 
-                if (commandText.equalsIgnoreCase("Select")) {
-                    String argument = command.next();
-                    if (!argument.isEmpty()) {
-                        for (Human astro : Astronauts) {
-                            if (astro.name.equals(argument)) {
-                                SelectedMember = astro;
+                switch (commandText.toLowerCase()) {
+                    case "select" -> {
+                        System.out.println("Select a team member.");
+                        oktocontinue = false;
+                        if (commandText.equalsIgnoreCase("Select")) {
+                            String argument = command.next();
+                            if (!argument.isEmpty()) {
+                                for (Human astro : Astronauts) {
+                                    if (astro.name.equals(argument)) {
+                                        SelectedMember = astro;
+                                        break;
+                                    }
+                                }
+                            } else {
+                                System.out.println("Invalid command. Please provide a name after 'select'.");
+                            }
+                            if (SelectedMember != null) {
                                 System.out.println("Selected " + SelectedMember.name);
-                                break;
+                            }else{
+                                System.out.println("Can't find"+ argument);
                             }
                         }
-                    } else {
-                        System.out.println("Invalid command. Please provide a name after 'select'.");
                     }
-                    if(SelectedMember!=null){
-                        oktocontinue=true;
-                        System.out.println("Selected "+ SelectedMember.name);
+                    case "nextturn" -> oktocontinue = true;
+                    case "moveup" -> {
+                        if (SelectedMember != null) {
+                            Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
+                            SelectedMember.moveUp();
+                            Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
+                            System.out.println("Your team:");
+                            System.out.println("Medics:");
+                            printteam(medics);
+                            System.out.println("Engineers:");
+                            printteam(engineers);
+                            System.out.println("Colonists:");
+                            printteam(colonists);
+                            printTable();
+
+                        } else {
+                            System.out.println("Select a team member first");
+                        }
                     }
-                }
-                switch (commandText.toLowerCase()) {
-                    case "select":
-                        break;
-                    case "nextturn":
-                        oktocontinue = true;
-                        break;
-                    case "moveup":
-                        oktocontinue = true;
-                        break;
-                    case "movedown":
-                        oktocontinue = true;
-                        break;
-                    case "moveleft":
-                        oktocontinue = true;
-                        break;
-                    case "moveright":
-                        oktocontinue = true;
-                        break;
-                    case "heal":
-                        oktocontinue = true;
-                        break;
-                    case "repair":
-                        oktocontinue = true;
-                        break;
-                    case "exit":
+                    case "movedown" -> {
+                        if (SelectedMember != null) {
+                            Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
+                            SelectedMember.moveDown();
+                            Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
+                            System.out.println("Your team:");
+                            System.out.println("Medics:");
+                            printteam(medics);
+                            System.out.println("Engineers:");
+                            printteam(engineers);
+                            System.out.println("Colonists:");
+                            printteam(colonists);
+                            printTable();
+
+                        } else {
+                            System.out.println("Select a team member first");
+                        }
+                    }
+                    case "moveleft" -> {
+                        if (SelectedMember != null) {
+                            Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
+                            SelectedMember.moveLeft();
+                            Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
+                            System.out.println("Your team:");
+                            System.out.println("Medics:");
+                            printteam(medics);
+                            System.out.println("Engineers:");
+                            printteam(engineers);
+                            System.out.println("Colonists:");
+                            printteam(colonists);
+                            printTable();
+
+                        } else {
+                            System.out.println("Select a team member first");
+                        }
+                    }
+                    case "moveright" -> {
+                        if (SelectedMember != null) {
+                            Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
+                            SelectedMember.moveRight();
+                            Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
+                            System.out.println("Your team:");
+                            System.out.println("Medics:");
+                            printteam(medics);
+                            System.out.println("Engineers:");
+                            printteam(engineers);
+                            System.out.println("Colonists:");
+                            printteam(colonists);
+                            printTable();
+                        } else {
+                            System.out.println("Select a team member first");
+                        }
+                    }
+                    case "heal" -> oktocontinue = true;
+                    case "repair" -> oktocontinue = true;
+                    case "exit" -> {
                         oktocontinue = true;
                         gameover = true;
-                        break;
-                    default:
+                    }
+                    default -> {
                         System.out.println("Invalid command. Please try again.");
-                        break;
-
+                        oktocontinue = false;
+                    }
                 }
                 if (oktocontinue) {
                     turnnumber++;

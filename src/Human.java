@@ -10,32 +10,128 @@ public  abstract class Human  implements Movement{
     byte y;
     int Oxygen=100;
 
-
+    @Override
     public void moveUp() {
-        if(x != 0) {
-            x--;
-        } else throw new IllegalArgumentException("Movement cannot be posible");
+        if(x!=0){
+            this.x--;
+        }
+        if (this.x == 1 || this.x == 7 && this.y == 2 || this.y == 7) {
+            System.out.println("You fell from a cliff!");
+            this.HP -= 100;
+        }
+        if (this.x == 2 || this.x == 7 && this.y == 1 || this.y == 4 || this.y == 9) {
+            System.out.println("You were infected by something!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 40;
+        }
+        if (this.x == 2 || this.x == 4 || this.x == 6 || this.x == 8 && this.y == 2 || this.y == 5 || this.y == 8) {
+            System.out.println("You broke your arm!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 20;
+        }
+        if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
+            System.out.println("Your suit has broken!");
+            System.out.println("Have the engineer repair it or continue to explore!");
+            this.Oxygen -= 40;
+        }
+        if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
+            System.out.println("Your oxygen levels are dropping fast!");
+            System.out.println("Have the engineer refill your tank or continue to explore!");
+            this.Oxygen -= 20;
+        }
     }
 
     @Override
-    public void moveDown(Human h1) {
-        if(h1.x != 9 ) {
-            h1.x++;
-        } else throw new IllegalArgumentException("Movement cannot be posible");
+    public void moveDown() {
+        if(x!=9){
+            this.x++;
+        }
+        if (this.x == 1 || this.x == 7 && this.y == 2 || this.y == 7) {
+            System.out.println("You fell from a cliff!");
+            this.HP -= 100;
+        }
+        if (this.x == 2 || this.x == 7 && this.y == 1 || this.y == 4 || this.y == 9) {
+            System.out.println("You were infected by something!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 40;
+        }
+        if (this.x == 2 || this.x == 4 || this.x == 6 || this.x == 8 && this.y == 2 || this.y == 5 || this.y == 8) {
+            System.out.println("You broke your arm!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 20;
+        }
+        if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
+            System.out.println("Your suit has broken!");
+            System.out.println("Have the engineer repair it or continue to explore!");
+            this.Oxygen -= 40;
+        }
+        if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
+            System.out.println("Your oxygen levels are dropping fast!");
+            System.out.println("Have the engineer refill your tank or continue to explore!");
+            this.Oxygen -= 20;
+        }
     }
 
     @Override
-    public void moveLeft(Human h1) {
-        if(h1.y != 0) {
-            h1.y--;
-        } else throw new IllegalArgumentException("Movement cannot be posible");
+    public void moveLeft() {
+        if(y!=0){
+            this.y--;
+        }
+        if (this.x == 1 || this.x == 7 && this.y == 2 || this.y == 7) {
+            System.out.println("You fell from a cliff!");
+            this.HP -= 100;
+        }
+        if (this.x == 2 || this.x == 7 && this.y == 1 || this.y == 4 || this.y == 9) {
+            System.out.println("You were infected by something!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 40;
+        }
+        if (this.x == 2 || this.x == 4 || this.x == 6 || this.x == 8 && this.y == 2 || this.y == 5 || this.y == 8) {
+            System.out.println("You broke your arm!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 20;
+        }
+        if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
+            System.out.println("Your suit has broken!");
+            System.out.println("Have the engineer repair it or continue to explore!");
+            this.Oxygen -= 40;
+        }
+        if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
+            System.out.println("Your oxygen levels are dropping fast!");
+            System.out.println("Have the engineer refill your tank or continue to explore!");
+            this.Oxygen -= 20;
+        }
     }
 
     @Override
-    public void moveRight(Human h1) {
-        if(h1.y != 9) {
-            h1.y++;
-        } else throw new IllegalArgumentException("Movement cannot be posible");
+    public void moveRight() {
+        if(y!=0){
+            this.y++;
+        }
+        if (x == 1 || x == 7 && y == 2 || y == 7) {
+            System.out.println("You fell from a cliff!");
+            this.HP -= 100;
+        }
+        if (this.x == 2 || this.x == 7 && this.y == 1 || this.y == 4 || this.y == 9) {
+            System.out.println("You were infected by something!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 40;
+        }
+        if (this.x == 2 || this.x == 4 || this.x == 6 || this.x == 8 && this.y == 2 || this.y == 5 || this.y == 8) {
+            System.out.println("You broke your arm!");
+            System.out.println("Have the medic heal you or continue to explore!");
+            this.HP -= 20;
+        }
+        if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
+            System.out.println("Your suit has broken!");
+            System.out.println("Have the engineer repair it or continue to explore!");
+            this.Oxygen -= 40;
+        }
+        if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
+            System.out.println("Your oxygen levels are dropping fast!");
+            System.out.println("Have the engineer refill your tank or continue to explore!");
+            this.Oxygen -= 20;
+        }
     }
 
     static final String[] names = {"John", "Michael", "Bill", "Liam", "Emma", "Noah", "Oliver", "Peter", "Chris",
