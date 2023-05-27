@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.regex.*;
 
 public class Colonist extends Human {
 
@@ -8,6 +7,7 @@ public class Colonist extends Human {
         this.y = y;
         this.name = name;
         this.age = age;
+        this.hasMoved=false;
     }
 
     public void explore() {
@@ -21,8 +21,8 @@ public class Colonist extends Human {
         switch (option) {
             case 1:
                 HP = (byte) (HP - 20);
-                Oxygen = Oxygen - 40;
-                System.out.println("You've arrived in Demacia!Your oxygen level is runnig low.It's " + Oxygen);
+                HEV = HEV - 40;
+                System.out.println("You've arrived in Demacia!Your oxygen level is runnig low.It's " + HEV);
                 System.out.println("You need a doctor!");
                 System.out.println("Your HP level is " + HP);
                 if (x == 2 || y == 2) {
@@ -54,6 +54,14 @@ public class Colonist extends Human {
         this.x = 4;
         this.y = 4;
     }
-
-
+    @Override
+    public boolean isColonist() {
+        return true;
+    }
+    public boolean isEnginner() {
+        return false;
+    }
+    public boolean isMedic() {
+        return false;
+    }
 }

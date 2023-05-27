@@ -1,18 +1,19 @@
 import java.util.Random;
-public  abstract class Human  implements Movement{
+
+public abstract class Human implements Movement {
     String name;
     int age;
-    boolean  gender;
+    boolean hasMoved;
     //  private  String status;
-    int HP=100;
+    int HP = 100;
 
     byte x;
     byte y;
-    int Oxygen=100;
+    int HEV = 100;
 
     @Override
     public void moveUp() {
-        if(x!=0){
+        if (x != 0) {
             this.x--;
         }
         if (this.x == 1 || this.x == 7 && this.y == 2 || this.y == 7) {
@@ -32,18 +33,18 @@ public  abstract class Human  implements Movement{
         if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
             System.out.println("Your suit has broken!");
             System.out.println("Have the engineer repair it or continue to explore!");
-            this.Oxygen -= 40;
+            this.HEV -= 40;
         }
         if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
             System.out.println("Your oxygen levels are dropping fast!");
             System.out.println("Have the engineer refill your tank or continue to explore!");
-            this.Oxygen -= 20;
+            this.HEV -= 20;
         }
     }
 
     @Override
     public void moveDown() {
-        if(x!=9){
+        if (x != 9) {
             this.x++;
         }
         if (this.x == 1 || this.x == 7 && this.y == 2 || this.y == 7) {
@@ -63,18 +64,18 @@ public  abstract class Human  implements Movement{
         if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
             System.out.println("Your suit has broken!");
             System.out.println("Have the engineer repair it or continue to explore!");
-            this.Oxygen -= 40;
+            this.HEV -= 40;
         }
         if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
             System.out.println("Your oxygen levels are dropping fast!");
             System.out.println("Have the engineer refill your tank or continue to explore!");
-            this.Oxygen -= 20;
+            this.HEV -= 20;
         }
     }
 
     @Override
     public void moveLeft() {
-        if(y!=0){
+        if (y != 0) {
             this.y--;
         }
         if (this.x == 1 || this.x == 7 && this.y == 2 || this.y == 7) {
@@ -94,18 +95,18 @@ public  abstract class Human  implements Movement{
         if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
             System.out.println("Your suit has broken!");
             System.out.println("Have the engineer repair it or continue to explore!");
-            this.Oxygen -= 40;
+            this.HEV -= 40;
         }
         if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
             System.out.println("Your oxygen levels are dropping fast!");
             System.out.println("Have the engineer refill your tank or continue to explore!");
-            this.Oxygen -= 20;
+            this.HEV -= 20;
         }
     }
 
     @Override
     public void moveRight() {
-        if(y!=0){
+        if (y != 0) {
             this.y++;
         }
         if (x == 1 || x == 7 && y == 2 || y == 7) {
@@ -125,32 +126,47 @@ public  abstract class Human  implements Movement{
         if (this.x == 1 || this.x == 6 || this.x == 9 && this.y == 4 || this.y == 7) {
             System.out.println("Your suit has broken!");
             System.out.println("Have the engineer repair it or continue to explore!");
-            this.Oxygen -= 40;
+            this.HEV -= 40;
         }
         if (this.x == 1 || this.x == 3 || this.x == 5 || this.x == 8 && this.y == 1 || this.y == 3 || this.y == 6) {
             System.out.println("Your oxygen levels are dropping fast!");
             System.out.println("Have the engineer refill your tank or continue to explore!");
-            this.Oxygen -= 20;
+            this.HEV -= 20;
         }
     }
 
-    static final String[] names = {"John", "Michael", "Bill", "Liam", "Emma", "Noah", "Oliver", "Peter", "Chris",
+    static final String[] namesOfEngineers = {"John", "Michael", "Bill", "Liam", "Emma", "Noah", "Oliver", "Peter", "Chris",
             "Charlotte", "Ethan", "Elizabeth", "Sofia", "Lucas", "James", "Grace", "Alexander", "Chloe", "Daniel",
             "Roxane", "Robert", "David", "Samuel", "Lilly", "Joseph", "Henry", "Ella", "Penelope", "Amelia", "Evelyn"};
-    ;
 
-    static final int[] ages={24,30,18,19,21,32,25,20,22,23};
-    public static int generateAge()
-    {
-        Random random=new Random();
-        int randomAge=ages[random.nextInt(ages.length)];
+    static final String[] namesOfMedics = {
+            "Alice", "Bob", "Charlie", "Rob", "Emily",
+            "Frank", "Grace", "Henry", "Isabella", "Jack",
+            "Katherine", "Ned", "Mia", "Noah", "Olivia",
+            "Patrick", "Quinn", "Ruby", "Tyrion", "Tessa",
+            "Ursula", "Victor", "Wendy", "Xavier", "Yara",
+            "Zachary", "Irine", "Benjamin", "Chloe", "Daniel"
+    };
+
+    static final String[] namesOfColonists = {"Adam", "Alex", "Ramon", "Caleb", "Christopher",
+            "Lore", "Gigel", "Ethan", "Elijah", "Gabriel",
+            "Henry", "Isaac", "Jack", "Jacob", "James",
+            "Walker", "Joseph", "Joshua", "Kyle", "Logan",
+            "Lucas", "Matthew", "Gabriel", "Mason", "Nathan",
+            "Noah", "Robert", "Owen", "Ryan", "Sheldon"};
+
+    static final int[] ages = {24, 30, 18, 19, 21, 32, 25, 20, 22, 23};
+
+    public static int generateAge() {
+        Random random = new Random();
+        int randomAge = ages[random.nextInt(ages.length)];
         return randomAge;
     }
-    public static String generateName() {
+
+    public static String generateName(String[] names) {
         Random random = new Random();
         String randomName = names[random.nextInt(names.length)];
         return randomName;
     }
-
 
 }

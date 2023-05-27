@@ -1,8 +1,8 @@
-public class Damage extends Human {
-    public Damage(){
-        this.x=1;
-        this.y=2;
-    }
+//public class Damage extends Human {
+//    public Damage(){
+//        this.x=1;
+//        this.y=2;
+//    }
 
 //    public void moveDown(Human h1) {
 //        if (h1.x == 1 || h1.x == 7 && h1.y == 2 || h1.y == 7) {
@@ -118,4 +118,4 @@ public class Damage extends Human {
 //        }
 //
 //    }
-}
+//}

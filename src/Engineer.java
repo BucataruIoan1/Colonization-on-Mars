@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.SortedMap;
 
 public class Engineer extends Human implements Movement {
 
@@ -9,6 +8,7 @@ public class Engineer extends Human implements Movement {
         this.y = y;
         this.name = name;
         this.age = age;
+        this.hasMoved=false;
     }
 
     public void build() {
@@ -21,7 +21,7 @@ public class Engineer extends Human implements Movement {
             HP = (byte) (HP + 20);
         } else {
             if (variabileOption == 2) {
-                Oxygen = 100;
+                HEV = 100;
             } else {
                 System.out.println("You are in danger!You only have 20 % of HP.");
                 HP = 20;
@@ -31,10 +31,19 @@ public class Engineer extends Human implements Movement {
 
     }
 
-    public void repair() {
-        System.out.println("The repairs are done");
-
+    public void repair(Human h1)
+    {
+        h1.HEV=100;
     }
 
-
+    @Override
+    public boolean isColonist() {
+        return false;
+    }
+    public boolean isEnginner() {
+        return true;
+    }
+    public boolean isMedic() {
+        return false;
+    }
 }
