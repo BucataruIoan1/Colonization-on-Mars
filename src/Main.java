@@ -97,27 +97,35 @@ public class Main {
         ArrayList<Medic> medics = new ArrayList<>(numberOfMedics);
         ArrayList<Colonist> colonists = new ArrayList<>(numberOfColonists);
 
+        System.out.println("-------------------------------------------");
+        System.out.println("Your team:");
+
+        System.out.println("Engineers:");
         for (int i = 0; i < numberOfEngineers; i++) {
             Engineer e1 = new Engineer((byte) 4, (byte) 4, Engineer.generateName(Human.namesOfEngineers), Engineer.generateAge());
             engineers.add(e1);
             Astronauts.add(e1);
             Mars[4][4].presents.add(e1);
         }
+        printteam(engineers);
 
-
+        System.out.println("Medics:");
         for (int i = 0; i < numberOfMedics; i++) {
             Medic m1 = new Medic((byte) 4, (byte) 4, Medic.generateName(Human.namesOfMedics), Medic.generateAge());
             medics.add(m1);
             Astronauts.add(m1);
             Mars[4][4].presents.add(m1);
         }
+        printteam(medics);
 
+        System.out.println("Colonists:");
         for (int i = 0; i < numberOfColonists; i++) {
             Colonist c1 = new Colonist((byte) 4, (byte) 4, Colonist.generateName(Human.namesOfColonists), Colonist.generateAge());
             colonists.add(c1);
             Astronauts.add(c1);
             Mars[4][4].presents.add(c1);
         }
+        printteam(colonists);
 
 
         System.out.println("It's time to explore!");
@@ -131,7 +139,29 @@ public class Main {
             }
 
             while (true) {
-                if (!oktocontinue) {
+                int deadindex = 0;
+                Human dead = null;
+                for(int i=0;i<Astronauts.size();i++){
+                    if(Astronauts.get(i).HP<=0) {
+                        deadindex=i;
+                        dead = Astronauts.get(i);
+                        Mars[Astronauts.get(deadindex).x][Astronauts.get(deadindex).y].presents.remove(dead);
+                        Astronauts.remove(i);
+                        for(int k=0; k<numberOfColonists; k++){
+                            colonists.remove(dead);
+                        }
+                        for(int l=0; l<numberOfEngineers; l++){
+                            engineers.remove(dead);
+                        }
+                        for(int m=0; m<numberOfMedics; m++){
+                            medics.remove(dead);
+                        }
+                        break;
+                    }
+                }
+
+
+                if(!firstprint) {
                     System.out.println("-------------------------------------------");
                     System.out.println("TURN " + turnnumber);
                     System.out.println("Your team:");
@@ -141,8 +171,9 @@ public class Main {
                     printteam(engineers);
                     System.out.println("Colonists:");
                     printteam(colonists);
-                    printTable();
                 }
+                firstprint = false;
+                printTable();
                 if (oktocontinue) {
                     for (Human astro : Astronauts) {
                         astro.hasMoved = false;
@@ -221,9 +252,9 @@ public class Main {
 
                         } else if (!SelectedMember.hasMoved && Mars[SelectedMember.x + 1][SelectedMember.y].explored) {
                             Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
-                            SelectedMember.moveUp();
+                            SelectedMember.moveDown();
                             Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
-                            Mars[SelectedMember.x][SelectedMember.y].explored = true;
+                            Mars[SelectedMember.x ][SelectedMember.y].explored = true;
                             SelectedMember.hasMoved = true;
                             printTable();
 
@@ -248,7 +279,7 @@ public class Main {
 
                         } else if (!SelectedMember.hasMoved && Mars[SelectedMember.x][SelectedMember.y - 1].explored) {
                             Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
-                            SelectedMember.moveUp();
+                            SelectedMember.moveLeft();
                             Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
                             Mars[SelectedMember.x][SelectedMember.y].explored = true;
                             SelectedMember.hasMoved = true;
@@ -275,7 +306,7 @@ public class Main {
 
                         } else if (!SelectedMember.hasMoved && Mars[SelectedMember.x][SelectedMember.y + 1].explored) {
                             Mars[SelectedMember.x][SelectedMember.y].presents.remove(SelectedMember);
-                            SelectedMember.moveUp();
+                            SelectedMember.moveRight();
                             Mars[SelectedMember.x][SelectedMember.y].presents.add(SelectedMember);
                             Mars[SelectedMember.x][SelectedMember.y].explored = true;
                             SelectedMember.hasMoved = true;
@@ -356,6 +387,22 @@ public class Main {
                     break;
                 }
             }
+
+            for (byte i = 0; i < 10; i++) {
+                for (byte j = 0; j < 10; j++) {
+                    if(!Mars[i][j].explored) {
+                        break;
+                    }
+                    System.out.println("YOU WON!");
+                    gameover =true;
+                }
+            }
+
+            if(colonists.size() == 0){
+                gameover = true;
+                System.out.println("GAME OVER");
+            }
+
             if (gameover) {
                 System.out.println("Exiting game...");
                 break;
@@ -364,6 +411,4 @@ public class Main {
         }
     }
 
-
 }
-
